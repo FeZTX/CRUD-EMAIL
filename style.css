@@ -129,14 +129,28 @@ input[type="password"] {
 }
 
 .boxLista span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border: 2px solid rgba(137, 43, 226, 0.63);
   background-color: rgba(0, 0, 0, 0.363);
   width: 100%;
   padding: 15px;
 }
 
+.boxLista button {
+  border: 2px solid yellow !important;
+
+}
+
 h1 {
   color: white;
+}
+
+.modal {
+  border: 2px solid blueviolet;
+  width: 500px;
+  height: 300px;
 }
 
 /* Ações */

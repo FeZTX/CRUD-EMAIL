@@ -11,6 +11,8 @@ inputSenha = document.createElement("Input");
 boxButton = document.createElement("div");
 btnCria = document.createElement("button");
 btnVolta = document.createElement("button");
+btnEdita = document.createElement("button");
+modalEditar = document.createElement("div");
 
 function addMail() {
   container.innerHTML = `<h1>Crie Seu email!</h1>`;
@@ -57,9 +59,6 @@ function insereEmail() {
   container.appendChild(btnLista);
 }
 
-function altera(){
-}
-
 function listaEmails() {
   // alert("Ta funcionando pelo menos!");
   
@@ -79,7 +78,7 @@ function listaEmails() {
   btnVolta.setAttribute("onClick", "menu()");
 
   for(let i = 0; i <= emails.length; i++){
-    boxInput.innerHTML += `<span>${emails[i].id}- ${emails[i].email}</span>`;
+    boxInput.innerHTML += `<span>${emails[i].id}- ${emails[i].email} <button onclick="editar()">AA</button></span>`;
   }
 }
 
@@ -87,4 +86,12 @@ function menu() {
   container.innerHTML = "";
   container.appendChild(btnInicia);
   container.appendChild(btnLista);
+}
+
+let editar = () => {
+  let pegaid = emails.id = id - 1;
+  alert(pegaid);
+
+  document.body.appendChild(modalEditar);
+  modalEditar.classList.add("modal")
 }
