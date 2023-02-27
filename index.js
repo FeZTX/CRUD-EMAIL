@@ -12,7 +12,9 @@ boxButton = document.createElement("div");
 btnCria = document.createElement("button");
 btnVolta = document.createElement("button");
 btnEdita = document.createElement("button");
+bgEditar = document.createElement("div");
 modalEditar = document.createElement("div");
+
 
 function addMail() {
   container.innerHTML = `<h1>Crie Seu email!</h1>`;
@@ -89,9 +91,18 @@ function menu() {
 }
 
 let editar = () => {
-  let pegaid = emails.id = id - 1;
-  alert(pegaid);
+  container.appendChild(bgEditar);
+  bgEditar.classList.add("bgModal");
+  bgEditar.appendChild(modalEditar);
+  modalEditar.classList.add("modal");
+  setTimeout(() => {
+    bgEditar.classList.add("bgModalOpen");
+  }, 0.1);
+  modalEditar.appendChild(inputEmail);
+  modalEditar.appendChild(inputSenha);
+  
+}
 
-  document.body.appendChild(modalEditar);
-  modalEditar.classList.add("modal")
+let alteraEmail = () => {
+
 }
