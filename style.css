@@ -61,6 +61,12 @@ header {
   width: 20%;
   height: 35px;
   outline: none;
+  transition: 0.35s;
+}
+
+#container button:hover,
+:focus {
+  background-color: rgb(71, 24, 116) !important;
 }
 
 .boxInput {
@@ -76,7 +82,7 @@ header {
 
 input[type="email"] {
   border: 2px solid blueviolet;
-  background-color: rgb(19, 6, 31);
+  background-color: rgb(19, 6, 31) !important;
   border-radius: 8px;
   width: 60%;
   color: white;
@@ -87,7 +93,7 @@ input[type="email"] {
 
 input[type="password"] {
   border: 2px solid blueviolet;
-  background-color: rgb(19, 6, 31);
+  background-color: rgb(19, 6, 31) !important;
   border-radius: 8px;
   color: white;
   width: 40%;
@@ -112,6 +118,12 @@ input[type="password"] {
   width: 20%;
   height: 35px;
   outline: none;
+  transition: 0.35s;
+}
+
+.boxButton button:hover,
+:focus {
+  background-color: rgb(71, 24, 116) !important;
 }
 
 .boxLista {
@@ -140,7 +152,6 @@ input[type="password"] {
 
 .boxLista button {
   border: 2px solid yellow !important;
-
 }
 
 h1 {
@@ -153,11 +164,11 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.900);
+  background-color: rgba(0, 0, 0, 0.9);
   width: 100%;
   height: 100vh;
   margin-top: -1500px;
-  transition: 1s;
+  transition: 0.55s;
 }
 
 .bgModalOpen {
@@ -176,7 +187,7 @@ h1 {
   width: 400px;
   height: 200px;
   background-color: rgb(20, 8, 31);
-  transition: 1s;
+  transition: 0.5s;
 }
 
 /* Ações */
