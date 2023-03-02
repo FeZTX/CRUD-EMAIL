@@ -3,7 +3,7 @@ const container = document.getElementById("container");
 const btnLista = document.getElementById("btnLista");
 // const inputEmail = document.getElementById("")
 let id = 1;
-let emails = [];
+let usuarios = [];
 
 boxInput = document.createElement("div");
 inputEmail = document.createElement("Input");
@@ -16,7 +16,7 @@ bgEditar = document.createElement("div");
 modalEditar = document.createElement("div");
 
 function addMail() {
-  container.innerHTML = `<h1>Crie Seu email!</h1>`;
+  container.innerHTML = `<h1>Crie Seu Usuário!</h1>`;
 
   inputEmail.value = "";
   inputSenha.value = "";
@@ -52,14 +52,14 @@ function insereEmail() {
   if (inputEmail.value && inputSenha.value != "") {
     user = {
       id: id,
-      email: inputEmail.value,
+      usuario: inputEmail.value,
       senha: inputSenha.value,
     };
-    emails.push(user);
+    usuarios.push(user);
     id++;
   }
 
-  console.log(emails);
+  console.log(usuarios);
   btnInicia.classList.remove("ocultaBtn");
   container.removeChild(boxButton);
   container.removeChild(boxInput);
@@ -67,12 +67,14 @@ function insereEmail() {
   container.appendChild(btnLista);
 }
 
-function listaEmails() {
+function listaUsuario() {
   // alert("Ta funcionando pelo menos!");
 
   console.log(boxButton);
   boxButton.innerHTML = "";
   boxInput.innerHTML = "";
+  inputEmail.value = "";
+  inputSenha.value = "";
 
   container.removeChild(btnInicia);
   container.removeChild(btnLista);
@@ -91,8 +93,8 @@ function listaEmails() {
     }
   });
 
-  for (let i = 0; i <= emails.length; i++) {
-    boxInput.innerHTML += `<span>${emails[i].id}- ${emails[i].email} <button onclick="editar()"><i class="fa-solid fa-pen"></i></button></span>`;
+  for (let i = 0; i <= usuarios.length; i++) {
+    boxInput.innerHTML += `<span>${usuarios[i].id}- ${usuarios[i].usuario} <button onclick="editar()"><i class="fa-solid fa-pen"></i></button></span>`;
   }
 }
 
@@ -115,11 +117,16 @@ let editar = () => {
   document.addEventListener("keydown", (evt) => {
     if (evt.key === "Escape") {
     bgEditar.classList.remove("bgModalOpen");
-    listaEmails();
+    listaUsuarios();
     }
   });
+  modalEditar.appendChild(btnEdita);
+  btnEdita.setAttribute("onClick", "alteraEmail()");
 };
 
 let alteraEmail = () => {
-  
+  for(let u = 0; u <= usuarios.length; u++){
+    alert(usuarios[u].usuario);
+  }
+  console.log(usuarios);
 };
