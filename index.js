@@ -1,58 +1,69 @@
 const btnInicia = document.getElementById("btnInicia");
 const container = document.getElementById("container");
 const btnLista = document.getElementById("btnLista");
-// const inputEmail = document.getElementById("")
+// const inputUser = document.getElementById("")
 let id = 1;
 let usuarios = [];
 
 boxInput = document.createElement("div");
-inputEmail = document.createElement("Input");
+inputUser = document.createElement("Input");
+inputUser.setAttribute("id", "inputUser");
+inputUser.setAttribute("type", "User");
+inputNovoUser = document.createElement("Input");
+inputNovoUser.setAttribute("type", "User");
 inputSenha = document.createElement("Input");
+inputSenha.setAttribute("id", "inputSenha");
+inputSenha.setAttribute("type", "Password");
 boxButton = document.createElement("div");
 btnCria = document.createElement("button");
+btnCria.setAttribute("onClick", "insereUser()");
 btnVolta = document.createElement("button");
+btnVolta.setAttribute("onClick", "menu()");
 btnEdita = document.createElement("button");
+btnEdita.setAttribute("onClick", "alteraUser()");
 bgEditar = document.createElement("div");
 modalEditar = document.createElement("div");
+
+labelInput = document.createElement("label");
+labelInput.setAttribute("for", "inputUser");
+labelInput.innerText = "Usuário";
+
+labelSenha = document.createElement("label");
+labelSenha.setAttribute("for", "inputSenha");
+labelSenha.innerText = "Senha";
 
 function addMail() {
   container.innerHTML = `<h1>Crie Seu Usuário!</h1>`;
 
-  inputEmail.value = "";
+  inputUser.value = "";
   inputSenha.value = "";
   boxInput.innerHTML = "";
   boxButton.appendChild(btnVolta);
   btnVolta.innerHTML = "Voltar";
-  btnVolta.setAttribute("onClick", "menu()");
   boxInput.classList.remove("boxLista");
   boxInput.classList.add("boxInput");
-  inputEmail.setAttribute("id", "inputEmail");
-  inputEmail.setAttribute("type", "Email");
-  inputSenha.setAttribute("id", "inputSenha");
-  inputSenha.setAttribute("type", "Password");
   boxButton.classList.add("boxButton");
   btnCria.innerHTML = "Enviar";
-  btnCria.setAttribute("onClick", "insereEmail()");
-
   container.appendChild(boxInput);
   container.appendChild(boxButton);
-  boxInput.appendChild(inputEmail);
+  boxInput.appendChild(labelInput);
+  boxInput.appendChild(inputUser);
+  boxInput.appendChild(labelSenha);
   boxInput.appendChild(inputSenha);
   boxButton.appendChild(btnCria);
 
-  document.addEventListener("keydown", (evt) => {
-    if (evt.key === "Escape") {
-    menu();
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      menu();
     }
   });
-
 }
 
-function insereEmail() {
-  if (inputEmail.value && inputSenha.value != "") {
+function insereUser() {
+  if (inputUser.value && inputSenha.value != "") {
     user = {
       id: id,
-      usuario: inputEmail.value,
+      usuario: inputUser.value,
       senha: inputSenha.value,
     };
     usuarios.push(user);
@@ -68,34 +79,32 @@ function insereEmail() {
 }
 
 function listaUsuario() {
-  // alert("Ta funcionando pelo menos!");
+  if (usuarios.length >= 1) {
+    boxButton.innerHTML = "";
+    boxInput.innerHTML = "";
+    inputUser.value = "";
+    inputSenha.value = "";
+    container.removeChild(btnInicia);
+    container.removeChild(btnLista);
+    container.appendChild(boxInput);
+    boxInput.classList.remove("boxInput");
+    boxInput.classList.add("boxLista");
+    container.appendChild(boxButton);
+    boxButton.classList.add("boxButton");
+    btnVolta.innerHTML = "Voltar";
+    boxButton.appendChild(btnVolta);
 
-  console.log(boxButton);
-  boxButton.innerHTML = "";
-  boxInput.innerHTML = "";
-  inputEmail.value = "";
-  inputSenha.value = "";
-
-  container.removeChild(btnInicia);
-  container.removeChild(btnLista);
-  container.appendChild(boxInput);
-  boxInput.classList.remove("boxInput");
-  boxInput.classList.add("boxLista");
-  container.appendChild(boxButton);
-  boxButton.classList.add("boxButton");
-  btnVolta.innerHTML = "Voltar";
-  boxButton.appendChild(btnVolta);
-  btnVolta.setAttribute("onClick", "menu()");
-
-  document.addEventListener("keydown", (evt) => {
-    if (evt.key === "Escape") {
-    menu();
+    for (let i = 0; i < usuarios.length; i++) {
+      boxInput.innerHTML += `<span>${usuarios[i].id}- ${usuarios[i].usuario} <button onclick="editar()"><i class="fa-solid fa-pen"></i></button></span>`;
+    }
+  } else {
+    alert("Não há registros!");
+  }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      menu();
     }
   });
-
-  for (let i = 0; i <= usuarios.length; i++) {
-    boxInput.innerHTML += `<span>${usuarios[i].id}- ${usuarios[i].usuario} <button onclick="editar()"><i class="fa-solid fa-pen"></i></button></span>`;
-  }
 }
 
 function menu() {
@@ -112,21 +121,32 @@ let editar = () => {
   setTimeout(() => {
     bgEditar.classList.add("bgModalOpen");
   }, 0.1);
-  modalEditar.appendChild(inputEmail);
-  modalEditar.appendChild(inputSenha);
-  document.addEventListener("keydown", (evt) => {
-    if (evt.key === "Escape") {
-    bgEditar.classList.remove("bgModalOpen");
-    listaUsuarios();
+  modalEditar.appendChild(inputUser);
+  modalEditar.appendChild(inputNovoUser);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      bgEditar.classList.remove("bgModalOpen");
+      listaUsuarios();
     }
   });
   modalEditar.appendChild(btnEdita);
-  btnEdita.setAttribute("onClick", "alteraEmail()");
+  btnEdita.innerText = "Alterar";
 };
 
-let alteraEmail = () => {
-  for(let u = 0; u <= usuarios.length; u++){
-    alert(usuarios[u].usuario);
+let alteraUser = () => {
+  let usuarioAlterado = false;
+  for (let i = 0; i < usuarios.length; i++) {
+    if (inputUser.value == usuarios[i].usuario) {
+      usuarios[i].usuario = inputNovoUser.value;
+      console.log(usuarios);
+      usuarioAlterado = true;
+    }
   }
-  console.log(usuarios);
+
+  if (UserAlterado) {
+    console.log("Usuário alterado com sucesso");
+  } else {
+    console.log("Usuário não foi encontrado no dicionário user");
+  }
 };
