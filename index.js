@@ -23,13 +23,13 @@ btnEdita = document.createElement("button");
 btnEdita.setAttribute("onClick", "alteraUser()");
 bgEditar = document.createElement("div");
 modalEditar = document.createElement("div");
-
 labelInput = document.createElement("label");
-labelInput.setAttribute("for", "inputUser");
 labelInput.innerText = "Usuário";
-
+labelInputNovo = document.createElement("label");
+labelInputNovo.innerText = "Novo Usuário";
+labelInputAntigo = document.createElement("label");
+labelInputAntigo.innerText = "Usuário a ser alterado";
 labelSenha = document.createElement("label");
-labelSenha.setAttribute("for", "inputSenha");
 labelSenha.innerText = "Senha";
 
 function addMail() {
@@ -68,6 +68,8 @@ function insereUser() {
     };
     usuarios.push(user);
     id++;
+  } else {
+    alert("Por favor, insira ambos os dados, para criar o Usuário");
   }
 
   console.log(usuarios);
@@ -121,13 +123,14 @@ let editar = () => {
   setTimeout(() => {
     bgEditar.classList.add("bgModalOpen");
   }, 0.1);
+  modalEditar.appendChild(labelInputAntigo);
   modalEditar.appendChild(inputUser);
+  modalEditar.appendChild(labelInputNovo);
   modalEditar.appendChild(inputNovoUser);
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       bgEditar.classList.remove("bgModalOpen");
-      listaUsuarios();
     }
   });
   modalEditar.appendChild(btnEdita);
@@ -144,9 +147,11 @@ let alteraUser = () => {
     }
   }
 
-  if (UserAlterado) {
-    console.log("Usuário alterado com sucesso");
+  if (usuarioAlterado) {
+    alert("Usuário alterado com sucesso");
+    menu();
+    bgEditar.classList.remove("bgModalOpen");
   } else {
-    console.log("Usuário não foi encontrado no dicionário user");
+    alert("Usuário não foi encontrado no dicionário user");
   }
 };

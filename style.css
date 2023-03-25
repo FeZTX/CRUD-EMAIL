@@ -180,7 +180,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 5px;
   border: 5px solid blueviolet;
   border-radius: 15px;
   margin-top: 65px;
@@ -188,6 +188,15 @@ h1 {
   height: 200px;
   background-color: rgb(20, 8, 31);
   transition: 0.5s;
+}
+
+.modal button {
+  margin-top: 5px;
+}
+
+label {
+  font-size: 13px;
+  color: white;
 }
 
 /* Ações */
