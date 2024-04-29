@@ -20,7 +20,7 @@ btnCria.setAttribute("onClick", "insereUser()");
 btnVolta = document.createElement("button");
 btnVolta.setAttribute("onClick", "menu()");
 btnEdita = document.createElement("button");
-btnEdita.setAttribute("onClick", "alteraUser()");
+btnEdita.setAttribute("onClick", 'alteraUser()');
 bgEditar = document.createElement("div");
 modalEditar = document.createElement("div");
 labelInput = document.createElement("label");
@@ -34,7 +34,6 @@ labelSenha.innerText = "Senha";
 
 function addMail() {
   container.innerHTML = `<h1>Crie Seu Usuário!</h1>`;
-
   inputUser.value = "";
   inputSenha.value = "";
   boxInput.innerHTML = "";
@@ -97,7 +96,7 @@ function listaUsuario() {
     boxButton.appendChild(btnVolta);
 
     for (let i = 0; i < usuarios.length; i++) {
-      boxInput.innerHTML += `<span>${usuarios[i].id}- ${usuarios[i].usuario} <button onclick="editar()"><i class="fa-solid fa-pen"></i></button></span>`;
+      boxInput.innerHTML += `<span>${usuarios[i].id}- ${usuarios[i].usuario} <div class="buttonsContainer"><button onclick="editar('${usuarios[i].usuario}')"><i class="fa-solid fa-pen"></i></button> <button onclick="excludeUser('${usuarios[i].id}')"><i class="fa-solid fa-x"></i></button></div></span>`;
     }
   } else {
     alert("Não há registros!");
@@ -115,7 +114,7 @@ function menu() {
   container.appendChild(btnLista);
 }
 
-let editar = () => {
+const editar = (name) => {
   container.appendChild(bgEditar);
   bgEditar.classList.add("bgModal");
   bgEditar.appendChild(modalEditar);
@@ -125,6 +124,8 @@ let editar = () => {
   }, 0.1);
   modalEditar.appendChild(labelInputAntigo);
   modalEditar.appendChild(inputUser);
+  inputUser.value = name;
+  inputUser.setAttribute('disabled', true)
   modalEditar.appendChild(labelInputNovo);
   modalEditar.appendChild(inputNovoUser);
 
@@ -137,21 +138,26 @@ let editar = () => {
   btnEdita.innerText = "Alterar";
 };
 
-let alteraUser = () => {
-  let usuarioAlterado = false;
+const alteraUser = () => {
   for (let i = 0; i < usuarios.length; i++) {
-    if (inputUser.value == usuarios[i].usuario) {
-      usuarios[i].usuario = inputNovoUser.value;
-      console.log(usuarios);
-      usuarioAlterado = true;
+    if (inputNovoUser.value.length > 0) {
+        usuarios[i].usuario = inputNovoUser.value;
+        alert("Usuário alterado com sucesso");
+        inputUser.removeAttribute('disabled', true)
+        menu();
+        bgEditar.classList.remove("bgModalOpen");
+    } else {
+      alert("Por favor insira o novo nome para usuário!!");
     }
   }
-
-  if (usuarioAlterado) {
-    alert("Usuário alterado com sucesso");
-    menu();
-    bgEditar.classList.remove("bgModalOpen");
-  } else {
-    alert("Usuário não foi encontrado no dicionário user");
-  }
 };
+
+const excludeUser = (userId) => {
+  for(let i = 0; i < usuarios.length; i++){
+    if(usuarios[i].id == userId) {
+      alert(`Usuário: ${usuarios[i].usuario} excluído do diretório`)
+      usuarios.splice(i, 1)
+    }
+  }
+  menu();
+}
