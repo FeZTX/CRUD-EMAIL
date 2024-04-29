@@ -150,8 +150,14 @@ input[type="password"] {
   padding: 15px;
 }
 
-.boxLista button {
+.boxLista button:nth-child(1) {
   border: 2px solid yellow !important;
+  width: 5em !important;
+}
+
+.boxLista button:nth-child(2) {
+  border: 2px solid red !important;
+  width: 5em !important;
 }
 
 h1 {
